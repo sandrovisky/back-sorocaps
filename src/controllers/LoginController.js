@@ -1,4 +1,4 @@
-const Usuario = require('../model/Usuario')
+const User = require('../model/User')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
@@ -8,7 +8,7 @@ module.exports = {
         const { email, senha } = req.body
         console.log(senha)
 
-        const result =  await Usuario.findOne({
+        const result =  await User.findOne({
             where: {
                 email
             }
@@ -30,9 +30,9 @@ module.exports = {
     },
 
     async validarLogin(req, res){
-        const id = req.idUsuario
+        const id = req.idUser
 
-        const result =  await Usuario.findByPk(id)
+        const result =  await User.findByPk(id)
         result.senha = undefined
         return res.json(result)    
         

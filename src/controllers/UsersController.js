@@ -1,11 +1,12 @@
-const Usuario = require('../model/Usuario')
+const User = require('../model/User')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
 module.exports = {
 
     async index(req, res){
-        const result =  await Usuario.findAll()
+        const result = await User.findAll()
+        console.log(result)
         return res.json(result)
     },
 
@@ -14,7 +15,7 @@ module.exports = {
         const { id } = req.params
         const { senha } = req.body 
 
-        await Usuario.update({ senha }, { where: { id } })
+        await User.update({ senha }, { where: { id } })
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -27,7 +28,7 @@ module.exports = {
 
     async delete(req, res){
 
-        await Usuario.destroy({ where: req.params })
+        await User.destroy({ where: req.params })
         .then(async response => {
             return res.json({ message: "deletado com sucesso"})
         })
@@ -35,19 +36,20 @@ module.exports = {
 
     async store(req, res){
         const { 
-            email, 
-            senha
+            user, 
+            name,
+            password
         } = req.body        
 
-        if(senha.length < 6)
-            return res.status(400).json({ message: "Senha precisa ser ao minimo 6 caracteres."})
+        if(password.length < 6)
+            return res.status(400).json({ message: "Senha precisa ter ao mínimo 6 caracteres."})
         
-        if(await Usuario.findOne({ where: { email } }))
-            return res.status(400).json({ message: "Usuario ja cadastrado."})
+        if(await User.findOne({ where: { user } }))
+            return res.status(400).json({ message: "Usuário ja existe."})
         
-        const senhaHash = bcrypt.hashSync(senha, 10)
+        const passwordHash = bcrypt.hashSync(password, 10)
 
-        await Usuario.create({ email, senha: senhaHash })
+        await User.create({ user, name, password: passwordHash })
         .then(response => {
             return res.status(200).json(response)
         })
