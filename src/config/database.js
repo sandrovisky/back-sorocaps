@@ -3,6 +3,6 @@ module.exports = {
     database: 'sorocaps', 
     username: 'postgres', 
     password: 'admin', 
-    host: '44.206.252.121',
+    host: '3.83.135.23',
     dialect: 'postgres',
 }

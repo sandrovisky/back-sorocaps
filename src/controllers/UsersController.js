@@ -27,7 +27,6 @@ module.exports = {
     },
 
     async delete(req, res){
-
         await User.destroy({ where: req.params })
         .then(async response => {
             return res.json({ message: "deletado com sucesso"})

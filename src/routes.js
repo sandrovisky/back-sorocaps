@@ -7,6 +7,6 @@ const LoginRoutes = require('./routes/LoginRoutes')
 const auth = require('./middlewares/auth')
 
 routes.use('/users/', UsersRoutes)
-routes.use('/login', LoginRoutes)
+routes.use('/login/', LoginRoutes)
 
 module.exports = routes;

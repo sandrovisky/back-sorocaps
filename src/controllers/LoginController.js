@@ -5,22 +5,21 @@ const jwt = require('jsonwebtoken')
 module.exports = {
 
     async login(req, res){
-        const { email, senha } = req.body
-        console.log(senha)
+        const { user, password } = req.body
 
         const result =  await User.findOne({
             where: {
-                email
+                user
             }
         })
     
         if(!result)
             return res.status(400).json({message: "Verificar as credenciais de acesso."})
 
-        if (!await bcrypt.compare(senha, result.senha))
+        if (!await bcrypt.compare(password, result.password))
             return res.status(400).json({message: "Verificar as credenciais de acesso."})
 
-        result.senha = undefined
+        result.password = undefined
 
         const token = jwt.sign({ id: result.id}, process.env.HASH_JWT, {
             expiresIn: "8h" //8hrs
