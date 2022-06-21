@@ -12,11 +12,11 @@ module.exports = {
       socialName: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
       },
       cnpj:  {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       cep:  {
         type: DataTypes.STRING,
