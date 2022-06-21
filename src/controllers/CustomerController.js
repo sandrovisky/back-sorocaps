@@ -1,12 +1,12 @@
-const Customer = require('../model/Customer')
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const Customer = require("../model/Customer")
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 
 function validarCNPJ(cnpj) {
-    cnpj = cnpj.replace(/\D/g, '');
+    cnpj = cnpj.replace(/\D/g, "");
     console.log(cnpj)
 
-    if (cnpj === '') return false;
+    if (cnpj === "") return false;
 
     if (cnpj.length !== 14)
         return false;
@@ -79,9 +79,11 @@ module.exports = {
         } = req.body
 
         if (!validarCNPJ(cnpj)) {
-            return res.status(400).json({message: 'CNPJ inválido!'})
+            return res.status(400).json({message: "CNPJ inválido!"})
         }
-
+        
+        if(await Customer.findOne({ where: { cnpj } }))
+            return res.status(400).json({ message: "CNPJ já cadastrado!"})
 
         await Customer.create({
             socialName,
