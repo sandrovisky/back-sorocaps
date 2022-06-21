@@ -7,10 +7,12 @@ const UserRoutes = require('./routes/UserRoutes')
 const LoginRoutes = require('./routes/LoginRoutes')
 const CEPRoutes = require('./routes/CepRoutes')
 const CustomerRoutes = require('./routes/CustomerRoutes')
+const ProductRoutes = require('./routes/ProductRoutes')
 
-routes.use('/cep/', CEPRoutes)
+routes.use('/cep/', auth, CEPRoutes)
 routes.use('/users/', UserRoutes)
 routes.use('/login/', LoginRoutes)
-routes.use('/customers/', CustomerRoutes)
+routes.use('/customers/', auth, CustomerRoutes)
+routes.use('/products/', auth, ProductRoutes)
 
 module.exports = routes;
