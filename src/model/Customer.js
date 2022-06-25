@@ -1,4 +1,4 @@
-const { Model, DataTypes, literal } = require('sequelize')
+const { Model, DataTypes, literal } = require("sequelize")
 
 class Customer extends Model {
     static init(sequelize) {
@@ -46,6 +46,11 @@ class Customer extends Model {
             timestamps: true,
             tableName: "customers",
         })
+    }
+
+    static associate({ models }) {
+        this.hasMany(models.Order, { foreignKey: "customerId", as: "orders" })
+        this.belongsTo(models.Order, { foreignKey: "id", as: "customer" })
     }
 }
 

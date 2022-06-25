@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken")
 
 module.exports = (req, res, next) => {
     const authHeader = req.headers["authorization"]
@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     if (!authHeader)
         return res.status(401).send({ error: "Token não encontrado!" })
 
-    const parts = authHeader.split(' ')
+    const parts = authHeader.split(" ")
 
     if (!parts.length === 2)
         return res.status(401).send({ error: "Token error" })

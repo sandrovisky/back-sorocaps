@@ -1,6 +1,5 @@
 const Product = require("../model/Product")
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken")
+const Order = require("../model/Order");
 
 module.exports = {
 
@@ -11,13 +10,15 @@ module.exports = {
     },
 
     async store(req, res) {
-        const {
+        let {
             code,
             description,
             measure,
             buyValue,
             sellValue,
         } = req.body
+
+        code = code.trim()
         
         if(await Product.findOne({ where: { code } }))
             return res.status(400).json({ message: "Código já cadastrado!" })
@@ -27,11 +28,11 @@ module.exports = {
         }
 
         await Product.create({
-            code,
-            description,
-            measure,
-            buyValue,
-            sellValue
+            code: code.trim(),
+            description: description.trim(),
+            measure: measure.trim(),
+            buyValue: buyValue.trim(),
+            sellValue: sellValue.trim(),
         })
             .then(response => {
                 return res.status(200).json(response)

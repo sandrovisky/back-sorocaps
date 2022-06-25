@@ -1,10 +1,10 @@
-const express = require('express')
+const express = require("express")
 
 const CustomerRoutes = express.Router()
 
-const CustomerController = require('../controllers/CustomerController')
+const CustomerController = require("../controllers/CustomerController")
 
-CustomerRoutes.get('', CustomerController.index)
-CustomerRoutes.post('/create/', CustomerController.store)
+CustomerRoutes.get("", CustomerController.index)
+CustomerRoutes.post("/create/", CustomerController.store)
 
 module.exports = CustomerRoutes

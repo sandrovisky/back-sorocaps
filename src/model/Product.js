@@ -1,6 +1,6 @@
-const { Model, DataTypes, literal } = require('sequelize')
+const { Model, DataTypes, literal } = require("sequelize")
 
-class User extends Model {
+class Product extends Model {
     static init(sequelize) {
         super.init({
             id: {
@@ -37,4 +37,4 @@ class User extends Model {
     }
 }
 
-module.exports = User
+module.exports = Product

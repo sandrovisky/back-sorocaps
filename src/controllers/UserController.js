@@ -1,6 +1,6 @@
-const User = require('../model/User')
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const User = require("../model/User")
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 
 module.exports = {
 
@@ -34,11 +34,17 @@ module.exports = {
     },
 
     async store(req, res){
-        const { 
+        let { 
             user, 
             name,
             password
-        } = req.body        
+        } = req.body
+
+        user = user.trim()
+        name = name.trim()
+
+        if(password.includes(" "))
+            return res.status(400).json({ message: "Senha não pode conter espaços em branco."})
 
         if(password.length < 6)
             return res.status(400).json({ message: "Senha precisa ter ao mínimo 6 caracteres."})

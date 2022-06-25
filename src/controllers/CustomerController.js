@@ -66,7 +66,7 @@ module.exports = {
     },
 
     async store(req, res) {
-        const {
+        let {
             socialName,
             cnpj,
             cep,
@@ -78,6 +78,9 @@ module.exports = {
             number
         } = req.body
 
+        cnpj = cnpj.replace(/\D/g, "");
+        cep = cep.replace(/\D/g, "");
+
         if (!validarCNPJ(cnpj)) {
             return res.status(400).json({message: "CNPJ inválido!"})
         }
@@ -85,16 +88,20 @@ module.exports = {
         if(await Customer.findOne({ where: { cnpj } }))
             return res.status(400).json({ message: "CNPJ já cadastrado!"})
 
+        if (cep.length != 8) {
+            return res.status(400).json({message: "CEP inválido!"})
+        }
+        
         await Customer.create({
-            socialName,
-            cnpj,
-            cep,
-            city,
-            uf,
-            district,
-            street,
-            complement,
-            number
+            socialName: socialName.trim(),
+            cnpj: cnpj.trim(),
+            cep: cep.trim(),
+            city: city.trim(),
+            uf: uf.trim(),
+            district: district.trim(),
+            street: street.trim(),
+            complement: complement.trim(),
+            number: number.trim(),
         })
             .then(response => {
                 return res.status(200).json(response)
