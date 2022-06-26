@@ -20,7 +20,7 @@ module.exports = {
         type: DataTypes.INTEGER,
         // 0 = em processo
         // 1 = aprovado
-        default: 0,
+        defaultValue: 0,
       },
       total:  {
         type: DataTypes.FLOAT,

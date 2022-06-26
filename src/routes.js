@@ -15,7 +15,7 @@ routes.use("/users/", UserRoutes)
 routes.use("/login/", LoginRoutes)
 routes.use("/customers/", auth, CustomerRoutes)
 routes.use("/products/", auth, ProductRoutes)
-routes.use("/orders/", OrderRoutes)
+routes.use("/orders/", auth, OrderRoutes)
 
 
 module.exports = routes;

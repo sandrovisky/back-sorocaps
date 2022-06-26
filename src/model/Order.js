@@ -15,6 +15,12 @@ class Order extends Model {
           key: "id"
         }
       },
+      status: {        
+        type: DataTypes.INTEGER,
+        // 0 = em processo
+        // 1 = aprovado
+        defaultValue: 0,
+      },
       total: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -27,7 +33,7 @@ class Order extends Model {
   }
 
   static associate({ models }) {
-    this.hasOne(models.Customer, { foreignKey: "id", as: "customer" });
+    this.belongsTo(models.Customer, { foreignKey: "customerId", as: "customer" });
     this.hasMany(models.OrderItem, { foreignKey: "orderId", as: "itens" })
   }
 }

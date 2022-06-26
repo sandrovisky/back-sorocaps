@@ -9,6 +9,9 @@ module.exports = {
                 {
                     association: "itens",
                     include: ["product"]
+                },
+                {
+                    association: "customer",
                 }
             ]
         })
@@ -43,6 +46,13 @@ module.exports = {
         })
 
         return res.status(200).json({ newOrder })
+    },
+
+    async approve(req, res) {
+        const { id } = req.body;
+        const order = await Order.update({ status: 1 }, { where: { id } })
+
+        return res.json(order)
     }
 }
 

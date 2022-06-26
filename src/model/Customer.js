@@ -47,11 +47,6 @@ class Customer extends Model {
             tableName: "customers",
         })
     }
-
-    static associate({ models }) {
-        this.hasMany(models.Order, { foreignKey: "customerId", as: "orders" })
-        this.belongsTo(models.Order, { foreignKey: "id", as: "customer" })
-    }
 }
 
 module.exports = Customer

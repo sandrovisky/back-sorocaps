@@ -15,7 +15,6 @@ Product.init(connection)
 Order.init(connection)
 OrderItem.init(connection)
 
-Customer.associate(connection)
 Order.associate(connection)
 OrderItem.associate(connection)
 
