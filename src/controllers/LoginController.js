@@ -10,7 +10,8 @@ module.exports = {
         const result = await User.findOne({
             where: {
                 user
-            }
+            },
+            attributes: ['id', 'user', 'password', 'name']
         })
 
         if (!result)
@@ -27,13 +28,4 @@ module.exports = {
 
         return res.json({ result, token })
     },
-
-    async validarLogin(req, res) {
-        const id = req.idUser
-
-        const result = await User.findByPk(id)
-        result.senha = undefined
-        return res.json(result)
-
-    }
 }

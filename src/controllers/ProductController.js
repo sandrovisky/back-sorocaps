@@ -5,7 +5,6 @@ module.exports = {
 
     async index(req, res) {
         const result = await Product.findAll()
-        console.log(result)
         return res.json(result)
     },
 

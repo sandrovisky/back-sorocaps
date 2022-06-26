@@ -6,6 +6,7 @@ const User = require("../model/User")
 const Product = require("../model/Product")
 const Order = require("../model/Order")
 const OrderItem = require("../model/OrderItem")
+const Log = require("../model/Log")
 
 const connection = new Sequelize(dbConfig)
 
@@ -14,7 +15,9 @@ Customer.init(connection)
 Product.init(connection)
 Order.init(connection)
 OrderItem.init(connection)
+Log.init(connection)
 
+Log.associate(connection)
 Order.associate(connection)
 OrderItem.associate(connection)
 

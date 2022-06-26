@@ -9,13 +9,14 @@ const CEPRoutes = require("./routes/CepRoutes")
 const CustomerRoutes = require("./routes/CustomerRoutes")
 const ProductRoutes = require("./routes/ProductRoutes")
 const OrderRoutes = require("./routes/OrderRoutes")
+const logging = require("./middlewares/logging")
 
 routes.use("/cep/", auth, CEPRoutes)
 routes.use("/users/", UserRoutes)
 routes.use("/login/", LoginRoutes)
 routes.use("/customers/", auth, CustomerRoutes)
-routes.use("/products/", auth, ProductRoutes)
-routes.use("/orders/", auth, OrderRoutes)
+routes.use("/products/", auth, logging, ProductRoutes)
+routes.use("/orders/", auth, logging, OrderRoutes)
 
 
 module.exports = routes;
