@@ -93,15 +93,15 @@ module.exports = {
         }
         
         await Customer.create({
-            socialName: socialName.trim(),
-            cnpj: cnpj.trim(),
-            cep: cep.trim(),
-            city: city.trim(),
-            uf: uf.trim(),
-            district: district.trim(),
-            street: street.trim(),
-            complement: complement.trim(),
-            number: number.trim(),
+            socialName: socialName,
+            cnpj: cnpj,
+            cep: cep,
+            city: city,
+            uf: uf,
+            district: district,
+            street: street,
+            complement: complement ,
+            number: number,
         })
             .then(response => {
                 return res.status(200).json(response)

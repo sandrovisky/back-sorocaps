@@ -1,9 +1,9 @@
 require("dotenv").config()
 module.exports = {
-    database: "sorocaps", 
-    username: "postgres", 
-    password: "admin", 
-    host: "localhost",
+    database: process.env.DB_NAME, 
+    username: process.env.DB_USERNAME, 
+    password: process.env.DB_PASSWORD, 
+    host: process.env.DB_HOST,
     dialect: "postgres",
-    port: "5434",
+    port: process.env.DB_PORT,
 }
